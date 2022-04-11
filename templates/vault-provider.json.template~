@@ -4,8 +4,8 @@
         "LeafCertTTL": "72h",
         "Address": "http://myvault:8200",
         "Token": "{{VAULT_TOKEN}}",
-        "RootPKIPath": "Namespace-1/connect-root",
-        "IntermediatePKIPath": "Namespace-2/connect-intermediate"
+        "RootPKIPath": "foo/connect-root",
+        "IntermediatePKIPath": "foo/connect-intermediate"
     },
     "ForceWithoutCrossSigning": false
 }

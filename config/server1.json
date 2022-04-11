@@ -4,15 +4,15 @@
     "ui_config": {
         "enabled" : true
     },
-    "data_dir": "consul/data",
+    "data_dir": "/consul/data",
     "datacenter": "dc1",
     "log_level":"INFO",
     "addresses": {
         "http" : "0.0.0.0"
     },
     "connect": {
-         "enabled": true
-       },
+      "enabled": true
+    },
     "retry_join":[
         "consul-server2",
         "consul-server3"

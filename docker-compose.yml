@@ -9,13 +9,17 @@ services:
     volumes:
      - ./config/server1.json:/consul/config/server1.json:ro
      - ./certs/:/consul/config/certs/:ro
+     - ./bin/consul:/bin/consul:ro
+     - ./license:/license:ro
+    environment:
+     - CONSUL_LICENSE_PATH=/license/consul.hclic
     networks:
       - consul
     ports:
       - "8500:8500"
       - "8600:8600/tcp"
       - "8600:8600/udp"
-    command: "agent -bootstrap-expect=3"
+    command: "/bin/consul agent -bootstrap-expect=3 -config-file=/consul/config/server1.json"
 
   consul-server2:
     image: consul:latest
@@ -24,9 +28,13 @@ services:
     volumes:
      - ./config/server2.json:/consul/config/server2.json:ro
      - ./certs/:/consul/config/certs/:ro
+     - ./bin/consul:/bin/consul:ro
+     - ./license:/license:ro
+    environment:
+     - CONSUL_LICENSE_PATH=/license/consul.hclic
     networks:
       - consul
-    command: "agent -bootstrap-expect=3"
+    command: "/bin/consul agent -bootstrap-expect=3 -config-file=/consul/config/server2.json"
 
   consul-server3:
     image: consul:latest
@@ -35,9 +43,13 @@ services:
     volumes:
      - ./config/server3.json:/consul/config/server3.json:ro
      - ./certs/:/consul/config/certs/:ro
+     - ./bin/consul:/bin/consul:ro
+     - ./license:/license:ro
+    environment:
+     - CONSUL_LICENSE_PATH=/license/consul.hclic
     networks:
       - consul
-    command: "agent -bootstrap-expect=3"
+    command: "/bin/consul agent -bootstrap-expect=3 -config-file=/consul/config/server3.json"
   myvault:
     image: vault
     container_name: myvault
@@ -46,10 +58,14 @@ services:
     ports:
       - "127.0.0.1:8200:8200"
     volumes:
-      - ./config/vault.json:/vault/config/vault.json:rw
+      - ./config/vault.hcl:/vault/config/vault.hcl:rw
+      - ./bin/vault:/bin/vault:ro
+      - ./license:/license:ro
+    environment:
+      - VAULT_LICENSE_PATH=/license/vault.hclic
     cap_add:
       - IPC_LOCK
-    entrypoint: vault server -config=/vault/config/vault.json
+    entrypoint: /bin/vault server -config=/vault/config/vault.hcl 
 
   consul-client1:
     image: consul:latest

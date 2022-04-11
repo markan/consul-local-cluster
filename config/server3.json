@@ -11,8 +11,8 @@
         "http" : "0.0.0.0"
     },
     "connect": {
-         "enabled": true
-       },
+      "enabled": true
+    },
     "retry_join":[
         "consul-server1",
         "consul-server2"

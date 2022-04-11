@@ -2,6 +2,8 @@
 
 TEMP_DIR=".temp"
 
+mkdir -p $TEMP_DIR
+
 docker-compose up -d
 sleep 15s
 ./cluster-init.sh
