@@ -23,8 +23,10 @@ $VAULT operator unseal $UNSEAL_KEY
 ROOT_TOKEN=`cat $TEMP_DIR/vault-init.json|jq -r '.root_token'`
 
 export VAULT_TOKEN=$ROOT_TOKEN
-$VAULT namespace create Namespace-1
-$VAULT namespace create Namespace-2
+$VAULT namespace create base
+$VAULT namespace create aceofbase
+$VAULT namespace create --namespace base namespace1
+$VAULT namespace create --namespace base namespace2
 
 sed "s/{{VAULT_TOKEN}}/${ROOT_TOKEN}/g" templates/vault-provider.json.template > $TEMP_DIR/vault-provider.json
 
